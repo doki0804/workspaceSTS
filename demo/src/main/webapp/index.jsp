@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>Hello Boot jsp~!  </h1><hr>
+<h1>Hello Boot jsp~!   </h1><hr>
 </body>
 </html>
