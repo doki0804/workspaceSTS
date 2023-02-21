@@ -47,6 +47,8 @@ public class ReflectionAnnotationGuestServiceMain {
 		while (beanIdIterator.hasNext()) {
 			String beanId=beanIdIterator.next();
 			Object beanInstance=applicationContext.get(beanId);
+			System.out.println(beanId);
+			System.out.println(beanInstance);
 			Method[] methods = beanInstance.getClass().getMethods();
 			for (Method method : methods) {
 				Annotation[] annotations = method.getAnnotations();
@@ -54,6 +56,7 @@ public class ReflectionAnnotationGuestServiceMain {
 					if (annotation instanceof AutoWire) {
 						AutoWire myAutoWire = (AutoWire) annotation;
 						System.out.println(myAutoWire);
+						System.out.println(myAutoWire.value());
 						System.out.println(beanInstance.getClass().getSimpleName() + ":" + method);
 						String componentId = myAutoWire.value();
 						Object injectionObject=applicationContext.get(componentId);
@@ -63,8 +66,6 @@ public class ReflectionAnnotationGuestServiceMain {
 				}
 			}
 		}
-
-		System.out.println(applicationContext);
 		System.out.println("############### Spring Container 초기화 end ############# ");
 
 		System.out.println("가. Spring Container객체[ApplicationContext객체]로부터 guestService 란 빈이름의 객체참조얻기");
