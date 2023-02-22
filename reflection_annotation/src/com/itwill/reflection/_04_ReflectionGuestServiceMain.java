@@ -31,10 +31,10 @@ public class _04_ReflectionGuestServiceMain {
 		Class serviceClazz = Class.forName(serviceClassName);
 		System.out.println("1.Spring Container  Dao,Service 객체생성");
 		Object dataSourceInstnace=dataSourceClazz.newInstance();
-		Object daoInstnace=daoClazz.newInstance();
+		Object daoInstance=daoClazz.newInstance();
 		Object serviceInstance=serviceClazz.newInstance();
 		applicationContext.put(dataSourceBeanName, dataSourceInstnace);
-		applicationContext.put(daoBeanName, daoInstnace);
+		applicationContext.put(daoBeanName, daoInstance);
 		applicationContext.put(serviceBeanName, serviceInstance);
 		
 		System.out.println("2.Spring Container Dao객체 setter 메쏘드 호출");
@@ -48,7 +48,7 @@ public class _04_ReflectionGuestServiceMain {
 				System.out.println("\tC. >>>>>>>> setter method 중에 호출메쏘드찾기: " + targetSetMethod);
 				if(targetSetMethod.equals(methodName)) {
 					System.out.println("\tD. >>>>>>>> "+targetSetMethod+" 호출");
-					method.invoke(daoInstnace, dataSourceInstnace);
+					method.invoke(daoInstance, dataSourceInstnace);
 				}
 			}
 		}
@@ -64,7 +64,7 @@ public class _04_ReflectionGuestServiceMain {
 				System.out.println("\tC. >>>>>>>> setter method 중에 호출메쏘드찾기: " + targetSetMethod);
 				if(targetSetMethod.equals(methodName)) {
 					System.out.println("\tD. >>>>>>>> "+targetSetMethod+" 호출");
-					method.invoke(serviceInstance, daoInstnace);
+					method.invoke(serviceInstance, daoInstance);
 				}
 			}
 		}
