@@ -23,11 +23,11 @@ import com.itwill.user.UserService;
 @ComponentScan(value = "com.itwill.guest")
 */
 @ComponentScan({"com.itwill.guest","com.itwill.user"})
-public class SpringBootApplicationMain {
+public class SpringBootBeanCreateApplicationMain {
 	
 	public static void main(String[] args) {
 		System.out.println("--------Spring Container초기화시작[ApplicationContext객체생성시작]--------");
-		ApplicationContext applicationContext = SpringApplication.run(SpringBootApplicationMain.class, args);
+		ApplicationContext applicationContext = SpringApplication.run(SpringBootBeanCreateApplicationMain.class, args);
 		System.out.println("--------Spring Container초기화 끝 [ApplicationContext객체생성  끝]--------");
 		System.out.println("--------빈의 아이디로 Spring Container에 등록되있는 스프링빈 참조얻기--------");
 		UserDao userDao = (UserDao)applicationContext.getBean("userDao");
