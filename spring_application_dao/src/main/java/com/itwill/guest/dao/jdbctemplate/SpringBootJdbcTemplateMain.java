@@ -3,6 +3,7 @@ package com.itwill.guest.dao.jdbctemplate;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -39,6 +40,7 @@ public class SpringBootJdbcTemplateMain {
 		 */
 		BeanPropertyRowMapper<Guest> guestBeanPropertyRowMapper =
 				new BeanPropertyRowMapper<Guest>(Guest.class);
+		
 		Guest guest = jdbcTemplate.queryForObject(selectDtoSql,
 												  new Object[]{208},
 												  new int[]{Types.INTEGER},
@@ -53,6 +55,22 @@ public class SpringBootJdbcTemplateMain {
 		String selectDtoListSql="select * from guest";
 		List<Guest> guestList = jdbcTemplate.query(selectDtoListSql, guestBeanPropertyRowMapper);
 		System.out.println("query[guestList] : "+guestList);
+		/*****************************************
+		 * SELECT --> queryForList 반환타입[List<String,Wrapper>]
+		 ****************************************/
+		String selectStringListSql="select guest_name from guest";
+		List<String> guest_nameList = jdbcTemplate.queryForList(selectStringListSql,String.class);
+		System.out.println("--> queryForList[List<String>] : " + guest_nameList);
+		/*****************************************
+		 * SELECT --> queryForMap 반환타입[Map<String,Object>]
+		 ****************************************/
+		String selectMapSql = "select guest_no from guest where guest_no = ?";
+		Map rowMap = jdbcTemplate.queryForMap(selectMapSql,264);
+		System.out.println("--> queryForMap반환타입[Map] : "+rowMap);
+		
+		String selectMapListSql = "select * from guest";
+		List rowMapList = jdbcTemplate.queryForList(selectMapListSql);
+		System.out.println("--> queryForMap반환타입[Map] : "+rowMapList);
 		/*
 		 * DML(update,delete,insert) --> update 반환타입[rowCount(int)]
 		 *

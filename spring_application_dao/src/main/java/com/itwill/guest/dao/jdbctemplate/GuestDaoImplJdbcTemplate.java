@@ -3,110 +3,48 @@ package com.itwill.guest.dao.jdbctemplate;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Types;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public class GuestDaoImplJdbcTemplate implements GuestDao {
-	//@Autowired
-	private DataSource dataSource;
-	
-	public GuestDaoImplJdbcTemplate() {
-		System.out.println("2.#### GuestDaoImpl() 기본생성자호출");
-	}
 	@Autowired
-	public GuestDaoImplJdbcTemplate(DataSource dataSource) {
-		System.out.println("2.#### GuestDaoImpl(DataSource dataSource) 생성자호출:"+this);
-		this.dataSource = dataSource;
-	}
-	//@Autowired
-	public void setDataSource(DataSource dataSource) {
-		System.out.println("3.#### GuestDaoImpl.setDataSource(DataSource dataSource) 메쏘드호출");
-		this.dataSource = dataSource;
-	}
+	private JdbcTemplate jdbcTemplate;
+
 	@Override
-	public ArrayList<Guest> selectAll()
-			throws Exception{
-		ArrayList<Guest> guestList=new ArrayList<Guest>();
-		Connection con=dataSource.getConnection();
-		PreparedStatement pstmt=con.prepareStatement(GuestSQL.GUEST_SELECT_ALL);
-		ResultSet rs=pstmt.executeQuery();
-		while(rs.next()) {
-			guestList.add(new Guest(rs.getInt("guest_no"), 
-									rs.getString("guest_name"), 
-									rs.getString("guest_date"),
-									rs.getString("guest_email"),
-									rs.getString("guest_homepage"),
-									rs.getString("guest_title"),
-									rs.getString("guest_content")));
-		}
-		con.close();
-		return guestList;
+	public List<Guest> selectAll() throws Exception {
+		return jdbcTemplate.query(GuestSQL.GUEST_SELECT_ALL, new BeanPropertyRowMapper<Guest>(Guest.class));
 	}
-	
+
 	@Override
-	public Guest selectByNo(int no)throws Exception{
-		Guest guest=null;
-		Connection con=dataSource.getConnection();
-		PreparedStatement pstmt=con.prepareStatement(GuestSQL.GUEST_SELECT_BY_NO);
-		pstmt.setInt(1, no);
-		ResultSet rs=pstmt.executeQuery();
-		if(rs.next()) {
-			guest=new Guest(rs.getInt("guest_no"), 
-					rs.getString("guest_name"), 
-					rs.getString("guest_date"),
-					rs.getString("guest_email"),
-					rs.getString("guest_homepage"),
-					rs.getString("guest_title"),
-					rs.getString("guest_content"));
-		}
-		con.close();
-		return guest;
+	public Guest selectByNo(int no) throws Exception {
+		return jdbcTemplate.queryForObject(GuestSQL.GUEST_SELECT_BY_NO, new Object[]{no},new int[] {Types.INTEGER},new BeanPropertyRowMapper<Guest>(Guest.class));
 	}
+
 	@Override
-	public int insertGuest(Guest guest)throws Exception {
-		Connection con=dataSource.getConnection();
-		PreparedStatement pstmt=con.prepareStatement(GuestSQL.GUEST_INSERT);
-		pstmt.setString(1, guest.getGuest_name());
-		pstmt.setString(2, guest.getGuest_email());
-		pstmt.setString(3, guest.getGuest_homepage());
-		pstmt.setString(4, guest.getGuest_title());
-		pstmt.setString(5, guest.getGuest_content());
-		int rowCount=pstmt.executeUpdate();
-		con.close();
-		return rowCount;
+	public int insertGuest(Guest guest) throws Exception {
+		return jdbcTemplate.update(GuestSQL.GUEST_INSERT,
+				guest.getGuest_name(),guest.getGuest_email(),guest.getGuest_homepage(),guest.getGuest_title(),guest.getGuest_content());
+	}
+
+	@Override
+	public int updateGuest(Guest guest) throws Exception {
+		return jdbcTemplate.update(GuestSQL.GUEST_UPDATE,
+				guest.getGuest_name(),guest.getGuest_email(),guest.getGuest_homepage(),guest.getGuest_title(),guest.getGuest_content(),guest.getGuest_no());
+	}
+
+	@Override
+	public int deleteGuest(int no) throws Exception {
+		return jdbcTemplate.update(GuestSQL.GUEST_DELETE,no);
+	}
 		
-	}
-	@Override
-	public int updateGuest(Guest guest)throws Exception {
-		Connection con=dataSource.getConnection();
-		PreparedStatement pstmt=con.prepareStatement(GuestSQL.GUEST_UPDATE);
-		pstmt.setString(1, guest.getGuest_name());
-		pstmt.setString(2, guest.getGuest_email());
-		pstmt.setString(3, guest.getGuest_homepage());
-		pstmt.setString(4, guest.getGuest_title());
-		pstmt.setString(5, guest.getGuest_content());
-		pstmt.setInt(6, guest.getGuest_no());
-		int rowCount=pstmt.executeUpdate();
-		con.close();
-		return rowCount;
-		
-	}
-	@Override
-	public int deleteGuest(int no)throws Exception {
-		Connection con=dataSource.getConnection();
-		PreparedStatement pstmt=con.prepareStatement(GuestSQL.GUEST_DELETE);
-		pstmt.setInt(1, no);
-		int rowCount=pstmt.executeUpdate();
-		con.close();
-		return rowCount;
-	}
-	
-	
-	
 }

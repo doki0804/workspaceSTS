@@ -1,4 +1,4 @@
-package com.itwill.user;
+package com.itwill.user.dao;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -10,6 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
+
+import com.itwill.user.dao.jdbc.User;
+import com.itwill.user.dao.jdbc.UserDao;
 
 @SpringBootApplication
 @SpringBootTest
