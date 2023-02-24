@@ -11,7 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 class GuestDaoImplJdbcTemplateTest {
 	@Autowired
 	GuestDao guestDao;
-	@Disabled
+
 	@Test
 	void testSelectAll() throws Exception {
 		assertNotNull(guestDao.selectAll());

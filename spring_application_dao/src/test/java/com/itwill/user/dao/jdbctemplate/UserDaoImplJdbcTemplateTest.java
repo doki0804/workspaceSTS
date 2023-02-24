@@ -26,57 +26,32 @@ class UserDaoImplJdbcTemplateTest {
 	}
 	//@Disabled
 	@Test
-	void testUpdate() {
+	void testUpdate() throws Exception {
 		User user = new User("test","2222","제이디비씨","jdbc@jdbc.com");
-		try {
-			int rowCount = userDao.update(user);
-			assertEquals(rowCount, 1);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		assertEquals(userDao.update(user), 1);
 	}
 	@Disabled
 	@Test
-	void testRemove() {
+	void testRemove() throws Exception {
 		String userId = "jdbctemplate";
-		try {
-			int rowCount = userDao.remove(userId);
-			assertEquals(rowCount, 1);
-		}catch (Exception e) {
-			e.printStackTrace();
-		}
+		assertEquals(userDao.remove(userId), 1);
 	}
 	@Disabled
 	@Test
-	void testFindUser() {
+	void testFindUser() throws Exception {
 		String userId = "test";
-		try {
-			User findUser = userDao.findUser(userId);
-			assertNotNull(findUser);
-		}catch (Exception e) {
-			e.printStackTrace();
-		}
+		assertNotNull(userDao.findUser(userId));
 	}
 	@Disabled
 	@Test
-	void testFindUserList() {
-		try {
-			List<User> userList = userDao.findUserList();
-			assertNotNull(userList);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	void testFindUserList() throws Exception {
+		assertNotNull(userDao.findUserList());
 	}
 	//@Disabled
 	@Test
-	void testExistedUser() {
+	void testExistedUser() throws Exception {
 		String userId = "test";
-		try {
-			boolean result = userDao.existedUser(userId);
-			assertEquals(result, true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		assertTrue(userDao.existedUser(userId));
 	}
 
 }
