@@ -9,16 +9,19 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.mybatis3.dao.mapper.StudentMapper;
 import com.mybatis3.domain.Student;
 
 @Repository
+@MapperScan(basePackages = "com.itwill.mybatis3.dao.mapper")
 public class StudentDao {
 	
 	@Autowired
-	private SqlSession sqlSession;
+	private StudentMapper studentMapper;
 	
 	public StudentDao() {
 	}
@@ -29,102 +32,34 @@ public class StudentDao {
 	 * A.select sql의결과타입이 DTO,VO,Domain객체인경우 resultType : DTO,VO,Domain
 	 */
 	public Student findStudentById(Integer studId) {
-		return sqlSession.selectOne("findStudentById",studId);
+		return studentMapper.findStudentById(studId);
 	}
 	
 	public List<Student> findAllStudents() {
-		return sqlSession.selectList("findAllStudents");
+		return studentMapper.findAllStudents();
 	}
 	
 	/*
 	 * select sql의결과타입이 Wrapper,String 객체인경우 resultType : Wrapper,String,java.lang.Integer
 	 */
 	public String findStudentNameById(Integer userId) {
-		return sqlSession.selectOne("findStudentNameById",userId);
+		return studentMapper.findStudnetNameById(userId);
 	}
 	
 	public List<String> findStudentNameList() {
-		return sqlSession.selectList("findStudentNameList");
+		return studentMapper.findStudnetNameList();
 	}
-	
-	/*
-	 * B.select sql의결과타입이 DTO,VO,Domain객체인경우 resultMap : DTO,VO,Domain
-	 */
-	public Student findStudentByIdResultMap(Integer studId) {
-		return null;
-	}
-	
-	public List<Student> findAllStudentsResultMap() {
-		return null;
-	}
-	
-	public List<Student> findStudentByIdRangeParamMap(HashMap idRangeMap) {
-		return null;
-	}
-	public List<Student> findStudentsThreeParamMap(HashMap studentsMap) {
-		return null;
-	}
-	public int updateStudentParamMap(Map studentMap) {
-		return 0;
-	}
-	
-	/***********************************
-	 * INSERT
-	 ***********************************/
-	public int insertStudent(Student student) {
-		return sqlSession.insert("insertStudent",student);
-	}
-	
-	public int insertStudentBySequence1(Student student) {
-		return sqlSession.insert("insertStudentBySequence1",student);
-	}
-	
-	/*
-	 * sequence실행후 PK return
-	 */
-	public int insertStudentBySequence2(Student student) {
-		return sqlSession.insert("insertStudentBySequence2",student);
-	}
-
-	/***********************************
-	 * UPDATE
-	 ***********************************/
-	public int updateStudentById(Student student) {
-		return sqlSession.update("updateStudentById", student);
-	}
-	
-	/***********************************
-	 * DELETE
-	 ***********************************/
-	public int deleteStudentById(Integer studId) {
-		return sqlSession.delete("deleteStudentById",studId);
-	}
-	
-	public int deleteStudentByName(String name) {
-		return sqlSession.delete("deleteStudentByName",name);
-	}
-	
-	public int deleteStudentByNameLike(String name) {
-		return sqlSession.delete("deleteStudentByNameLike",name);
-	}
-
-	
-	
 	
 	/**************************************************
-	 * 결과데이타를 Map(HashMap)에 담아서 반환할수있다
-	 ***************************************************/
-	public Map findStudentByIdMap(Integer studId) {
-		return null;
+	 * SELECT[students + addresses JOIN]( 1 : 1 )
+	 **************************************************/
+	/*
+	 * select sql의결과타입이 DTO,VO,Domain객체인경우 resultMap : studentWithAddressResultMap
+	 */
+	public Student findStudentByIdWithAddress(Integer studId) {
+		return studentMapper.findStudentByIdWithAddress(studId);
 	}
-
-	public List<Map> findAllStudentsMapList() {
-		return null;
-	}
-
-
-
-
+	
 	/**************************************************
 	 * SELECT[students + address + courses[course_enrollment] JOIN( 1 : 1 : N )
 	 **************************************************/
@@ -132,7 +67,7 @@ public class StudentDao {
 	 * select sql의결과타입이 DTO,VO,Domain객체인경우 resultMap : studentWithCoursesResultMap
 	 */
 	public Student findStudentByIdWithAddressWithCourses(Integer studId) {
-		return null;
+		return studentMapper.findStudentByIdWithAddressWithCourses(studId);
 	}
 
 	/**************************************************
@@ -142,18 +77,90 @@ public class StudentDao {
 	 * select sql의결과타입이 DTO,VO,Domain객체인경우 resultMap : studentWithCoursesResultMap
 	 */
 	public Student findStudentByIdWithCourses(Integer studId) {
-		return null;
+		return studentMapper.findStudentByIdWithCourses(studId);
 	}
 
-	/**************************************************
-	 * SELECT[students + addresses JOIN]( 1 : 1 )
-	 **************************************************/
+	
 	/*
-	 * select sql의결과타입이 DTO,VO,Domain객체인경우 resultMap : studentWithAddressResultMap
+	 * B.select sql의결과타입이 DTO,VO,Domain객체인경우 resultMap : DTO,VO,Domain
 	 */
-	public Student findStudentByIdWithAddress(Integer studId) {
-		return null;
+	public Student findStudentByIdResultMap(Integer studId) {
+		return studentMapper.findStudentByIdResultMap(studId);
+	}
+	
+	public List<Student> findAllStudentsResultMap() {
+		return studentMapper.findAllStudentsResultMap();
+	}
+	
+	public List<Student> findStudentByIdRangeParamMap(HashMap idRangeMap) {
+		return studentMapper.findStudentByIdRangeParamMap(idRangeMap);
+	}
+	public List<Student> findStudentsThreeParamMap(HashMap studentsMap) {
+		return studentMapper.findStudentsThreeParamMap(studentsMap);
+	}
+	public int updateStudentParamMap(Map studentMap) {
+		return studentMapper.updateStudentParamMap(studentMap);
+	}
+	
+	/***********************************
+	 * INSERT
+	 ***********************************/
+	public int insertStudent(Student student) {
+		return studentMapper.insertStudent(student);
+	}
+	
+	public int insertStudentBySequence1(Student student) {
+		return studentMapper.insertStudentBySequence1(student);
+	}
+	
+	/*
+	 * sequence실행후 PK return
+	 */
+	public int insertStudentBySequence2(Student student) {
+		return studentMapper.insertStudentBySequence2(student);
 	}
 
+	/***********************************
+	 * UPDATE
+	 ***********************************/
+	public int updateStudentById(Student student) {
+		return studentMapper.updateStudentById(student);
+	}
+	
+	/***********************************
+	 * DELETE
+	 ***********************************/
+	public int deleteStudentById(Integer studId) {
+		return studentMapper.deleteStudentById(studId);
+	}
+	
+	public int deleteStudentByName(String name) {
+		return studentMapper.deleteStudentByName(name);
+	}
+	
+	public int deleteStudentByNameLike(String name) {
+		return studentMapper.deleteStudentByName(name);
+	}
+
+	
+	
+	
+	/**************************************************
+	 * 결과데이타를 Map(HashMap)에 담아서 반환할수있다
+	 ***************************************************/
+	public Map findStudentByIdMap(Integer studId) {
+		return studentMapper.findStudentByIdMap(studId);
+	}
+
+	public List<Map> findAllStudentsMapList() {
+		return studentMapper.findAllStudentsMapList();
+	}
+
+
+
+
+	
+
+	
 
 }
