@@ -43,11 +43,11 @@ public class StudentDao {
 	 * select sql의결과타입이 Wrapper,String 객체인경우 resultType : Wrapper,String,java.lang.Integer
 	 */
 	public String findStudentNameById(Integer userId) {
-		return studentMapper.findStudnetNameById(userId);
+		return studentMapper.findStudentNameById(userId);
 	}
 	
 	public List<String> findStudentNameList() {
-		return studentMapper.findStudnetNameList();
+		return studentMapper.findStudentNameList();
 	}
 	
 	/**************************************************

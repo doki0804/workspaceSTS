@@ -1,6 +1,7 @@
 package com.mybatis3.dao;
 
 import java.util.Date;
+import java.util.HashMap;
 
 import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.annotation.MapperScan;
@@ -26,6 +27,11 @@ public class SpringBootStudentDaoJOINSELECTMain {
 		System.out.println(studentDao.findStudentByIdWithCourses(1));
 		System.out.println(studentDao.findStudentByIdWithAddressWithCourses(1));
 		System.out.println("---------findStudentByIdResultMap--------------------");
+		HashMap<String, Object> idRangeMap = new HashMap<>();
+		idRangeMap.put("startId", 1);
+		idRangeMap.put("endId", 3);
+		System.out.println(studentDao.findStudentByIdRangeParamMap(idRangeMap));
+		System.out.println(studentDao.findAllStudentsMapList());
 		System.out.println("---------findAllStudentsResultMap--------------------");
 		
 	}

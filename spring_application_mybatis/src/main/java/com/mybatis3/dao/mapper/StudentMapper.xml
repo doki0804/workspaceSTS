@@ -36,8 +36,15 @@
 		</collection>
 	</resultMap>
 	
+	<resultMap type="com.mybatis3.domain.Student" id="studentResultMap" autoMapping="true"/>
 	
+	<select id="findStudentByIdRangeParamMap" parameterType="HashMap" resultMap="studentResultMap">
+		select * from students where stud_id BETWEEN #{startId} AND #{endId}
+	</select>
 	
+	<select id="findAllStudentsMapList" resultType="java.util.Map">
+		select * from students
+	</select>
 	<!-- 
 	/*
 	 * A.select sql의결과타입이 DTO,VO,Domain객체인경우 resultType : DTO,VO,Domain
@@ -95,7 +102,8 @@
 		join courses c
 		on ce.course_id=c.course_id where s.stud_id=#{studId}
 	</select>
-	<!-- 
+	
+
 	<select id="findStudentByIdWithCourses" 
 			parameterType="java.lang.Integer" 
 			resultMap="studentByIdWithCoursesResultMap">
@@ -107,7 +115,6 @@
 		join courses c
 		on ce.course_id=c.course_id where s.stud_id=#{studId}
 	</select>
-	 -->
 	<!--
 	********************************************************
 							insert

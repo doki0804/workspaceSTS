@@ -26,9 +26,9 @@ public interface StudentMapper {
 	
 	public List<Student> findAllStudents();
 	
-	public String findStudnetNameById(int studId);
+	public String findStudentNameById(int studId);
 	
-	public List<String> findStudnetNameList();
+	public List<String> findStudentNameList();
 	
 	public int insertStudent(Student student);
 	
@@ -49,15 +49,8 @@ public interface StudentMapper {
 
 	public Student findStudentByIdWithAddressWithCourses(Integer studId);
 	
-	@ResultMap("studentByIdWithCoursesResultMap")
-	@Select("		select s.stud_id, s.name as s_name, email,phone, dob,"
-			+ "		c.course_id, c.name as c_name, description, start_date, end_date"
-			+ "		from students s"
-			+ "		join course_enrollment ce"
-			+ "		on s.stud_id = ce.stud_id"
-			+ "		join courses c"
-			+ "		on ce.course_id=c.course_id where s.stud_id=#{studId}")
-	public Student findStudentByIdWithCourses(@Param("studId") Integer studId);
+	
+	public Student findStudentByIdWithCourses(Integer studId);
 	
 	public Student findStudentByIdResultMap(Integer studId);
 
