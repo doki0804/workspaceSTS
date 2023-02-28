@@ -11,6 +11,7 @@ public class Guest {
 	public String guest_homepage;
 	public String guest_title;
 	public String guest_content;
+	
 	public Guest() {
 	}
 	public Guest(int guest_no, String guest_name, String guest_date, String guest_email, String guest_homepage,
