@@ -1,4 +1,4 @@
-package com.itwill.config;
+package com.itwill.guest.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

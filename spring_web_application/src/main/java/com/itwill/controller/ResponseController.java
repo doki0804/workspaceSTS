@@ -18,7 +18,7 @@ public class ResponseController {
 	/*
 	 * fowading view객체반환
 	 */
-	@RequestMapping("/response_forward_view_object.do")
+	@RequestMapping("/response_forward_view_object")
 	public View response_forward_view_object() {
 		InternalResourceView internalResourceView=new InternalResourceView();
 		internalResourceView.setUrl("/WEB-INF/views/response_forward_view_object.jsp");
@@ -40,7 +40,7 @@ public class ResponseController {
 	/*
 	 * fowading view name(String)반환
 	 */
-	@RequestMapping("/response_forward_view_name.do")
+	@RequestMapping("/response_forward_view_name")
 	public String response_forward_view_name() {
 		/* 
 		  0 . Controller 가 view name(String)을 반환
@@ -75,7 +75,7 @@ public class ResponseController {
 	/*
 	 * redirect view객체반환
 	 */
-	@RequestMapping("/response_redirect_view_object.do")
+	@RequestMapping("/response_redirect_view_object")
 	public View response_redirect_view_object() {
 		RedirectView redirectView=new RedirectView();
 		redirectView.setUrl("response_redirect_view_object.jsp");
@@ -96,7 +96,7 @@ public class ResponseController {
 	/*
 	 * redirect view name(String)반환
 	 */
-	@RequestMapping("/response_redirect_view_name.do")
+	@RequestMapping("/response_redirect_view_name")
 	public String response_redirect_view_name() {
 		/* 
 		  0 . Controller 가 view name(String)반환
@@ -122,7 +122,7 @@ public class ResponseController {
 	/*
 	 * xml출력 view object반환
 	 */
-	@RequestMapping("/response_xml_view_object.do")
+	@RequestMapping("/response_xml_view_object")
 	public View response_xml_view_object(Model model) {
 		XMLView xmlView=new XMLView();
 		/*
@@ -148,7 +148,7 @@ public class ResponseController {
 	/*
 	 * xml출력 view name반환
 	 */
-	@RequestMapping("/response_xml_view_name.do")
+	@RequestMapping("/response_xml_view_name")
 	public String response_xml_view_name(Model model) {
 		List<String> friendList=new ArrayList<String>();
 		friendList.add("김수미");
