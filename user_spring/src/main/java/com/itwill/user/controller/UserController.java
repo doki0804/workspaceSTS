@@ -17,6 +17,9 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import com.itwill.user.User;
 import com.itwill.user.UserService;
+import com.itwill.user.exception.ExistedUserException;
+import com.itwill.user.exception.IdNotFoundException;
+import com.itwill.user.exception.PasswordMismatchException;
 /*
  * /user_main 
  * /user_write_form 
@@ -47,44 +50,41 @@ public class UserController {
 	}
 	
 	@PostMapping("/user_write_action")
-	public String user_write_action_post(Model model, User user) throws Exception {
+	public String user_write_action_post(Model model,@ModelAttribute("fuser") User user) throws Exception {
 		String forward_path = "";
-		int insertRowCount = userService.create(user);
-		if(insertRowCount==1) {
-			return forward_path = "redirect:/user_login_form";
-		}else {
+		try {
+			userService.create(user);
+			forward_path = "redirect:/user_login_form";
+			
+		}catch (ExistedUserException e) {
 			forward_path = "user_write_form";
-			String msg = "아이디가 중복입니다.";
-			model.addAttribute("msg",msg);
-			model.addAttribute("fuser",user);
+			model.addAttribute("msg",e.getMessage());
+			//model.addAttribute("fuser",user);
 		}
+		
 		return forward_path;
 	}
 
 	@GetMapping("/user_login_form")
-	public String user_login_form(Model model, User user) {
-		model.addAttribute("fuser",user);
-		String forward_path = "user_login_form";
-		return forward_path;
+	public String user_login_form(@ModelAttribute("fuser") User user) {
+		return "user_login_form";
 	}
 
 	@PostMapping("/user_login_action")
-	public String user_login_action_post(Model model, User user) throws Exception {
-		String forwardPath = "user_login_form";
-		int rowCount = userService.login(user.getUserId(), user.getPassword());
-		if(rowCount==2) {
+	public String user_login_action(Model model,@ModelAttribute("fuser") User user) throws Exception {
+		String forwardPath = "";
+		try {
+			userService.login(user.getUserId(), user.getPassword());
 			model.addAttribute("sUserId",user.getUserId());
-			forwardPath = "redirect:/user_main";
-		}else if(rowCount==1) {
+			forwardPath = "redirect:user_main";
+		} catch (IdNotFoundException e) {
+			e.printStackTrace();
+			model.addAttribute("msg1",e.getMessage());
 			forwardPath = "user_login_form";
-			String msg2 = "비밀번호가 불일치합니다";
-			model.addAttribute("msg2",msg2);
-			model.addAttribute("fuser",user);
-		}else if(rowCount==0) {
+		}catch (PasswordMismatchException e) {
+			e.printStackTrace();
+			model.addAttribute("msg2",e.getMessage());
 			forwardPath = "user_login_form";
-			String msg1 = "아이디가 존재하지 않습니다";
-			model.addAttribute("msg1",msg1);
-			model.addAttribute("fuser",user);
 		}
 		return forwardPath;
 	}
@@ -156,6 +156,13 @@ public class UserController {
 		String forwardPath = "redirect:/user_main";
 		return forwardPath;
 	}
+
+	/*****************Local Exception Handler*******************/
+	@ExceptionHandler(Exception.class)
+	public String user_exception_handler(Exception e) {
+		return "user_error";
+	}
+	
 
 
 }
