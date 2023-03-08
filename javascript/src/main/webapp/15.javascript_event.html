@@ -47,7 +47,45 @@
 		/*** DOM LEVEL - 2 ***/
 		document.getElementById('button3').addEventListener('click',button3EventHandler1);
 		document.getElementById('button3').addEventListener('click',button3EventHandler2);
+		document.getElementById('button3').addEventListener('click',function(e){
+			let msg = "button3익명EventHandler1[click]-->이벤트타겟: "+e.target+",이벤트타입: "+e.type;
+			displayMessage(msg);
+		});
+		document.getElementById('button3').addEventListener('mouseover',function(e){
+			let msg = "button3익명EventHandler2[mouseover]-->이벤트타겟: "+e.target+",이벤트타입: "+e.type;
+			displayMessage(msg);
+		});
 		
+		let movie_rankOrderedListElement = document.getElementById('movie_rank');
+		let movie_rankListElementArray = movie_rankOrderedListElement.getElementsByTagName("li");
+		for(movie_rankListElement of movie_rankListElementArray){
+			movie_rankListElement.addEventListener('click',function(e){
+				let clickElement=e.target;
+				displayMessage('click한 영화: '+clickElement.innerHTML);
+				if(clickElement.style.background=='gray'){
+					clickElement.style.background='white';
+					clickElement.style.color='black';
+				}else{
+					clickElement.style.background='gray';
+					clickElement.style.color='white';
+				}
+				
+			});
+		}
+		
+		for(drama_rankListElement of drama_rank.getElementsByTagName("li")){
+			drama_rankListElement.addEventListener('click',function(e){
+				let clickElement=e.target;
+				displayMessage('click한 드라마: '+clickElement.innerHTML);
+				if(clickElement.style.background=='gray'){
+					clickElement.style.background='white';
+					clickElement.style.color='black';
+				}else{
+					clickElement.style.background='gray';
+					clickElement.style.color='white';
+				}
+			});
+		}
 		/*
 			<< element1의 하위노드만검색 >>
 			element1.getElementById();
