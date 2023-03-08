@@ -9,16 +9,20 @@
 		resultDivE.innerHTML += msg+"<br>";
 	}
 	function inlineEventHandler(e){
-		
+		let msg = "inlineEventHandler-->이벤트타겟: "+e.target+",이벤트타입: "+e.type;
+		displayMessage(msg);
 	}
 	function button2EventHandler(e){
-	   
+		let msg = "button2EventHandler-->이벤트타겟: "+e.target+",이벤트타입: "+e.type;
+		displayMessage(msg);
 	}
 	function button3EventHandler1(e){
-	   
+		let msg = "button3EventHandler1-->이벤트타겟: "+e.target+",이벤트타입: "+e.type;
+		displayMessage(msg);
 	}
 	function button3EventHandler2(e){
-	    
+		let msg = "button3EventHandler2-->이벤트타겟: "+e.target+",이벤트타입: "+e.type;
+		displayMessage(msg);
 	}
 	
 	/*
@@ -29,17 +33,20 @@
 	function event_regist(){
 		alert(' >>>> 실행시점 DOMTree로딩완료후 랜더링전시점에실행');
 		/*** DOM LEVEL - 0 ***/
-		
+		let button2E = document.getElementById('button2');
 		/*********CASE1*******/
-		
+		//button2E.onclick=button2EventHandler;
 		/*********CASE2******/
-		
+		button2E.onclick=function(e){
+			let msg = "button2EventHandler익명함수-->이벤트타겟: "+e.target+",이벤트타입: "+e.type;
+			displayMessage(msg);
+		}
 		/*
 		https://www.w3schools.com/
 		*/
 		/*** DOM LEVEL - 2 ***/
-		
-		
+		document.getElementById('button3').addEventListener('click',button3EventHandler1);
+		document.getElementById('button3').addEventListener('click',button3EventHandler2);
 		
 		/*
 			<< element1의 하위노드만검색 >>
@@ -53,14 +60,16 @@
 		
 		
 		
+	
 	};
 	/*
 	window.onload 이벤트발생시점
 	   - DOM Tree 생성직후 렌더링전에호출  이벤트등록
-	
 	*/
-	
-	
+	//window.onload=event_regist;
+	window.onload=function(){
+		event_regist();
+	};
 </script>
 </head>
 <body >
@@ -75,11 +84,11 @@
 	<input id="button4" name="button4" type="button" value="event remove"/>
 </form>
 <ol id='movie_rank'>
-	<li>조커</li>
-	<li>람보</li>
-	<li>AI</li>
-	<li>알라딘</li>
-	<li>체르노빌</li>
+	<li>더 퍼스트 슬램덩크</li>
+	<li>아바타:물의길</li>
+	<li>영웅</li>
+	<li>교섭</li>
+	<li>장화신은 고양이</li>
 </ol>
 <ol id='drama_rank'>
 	<li>도깨비</li>
