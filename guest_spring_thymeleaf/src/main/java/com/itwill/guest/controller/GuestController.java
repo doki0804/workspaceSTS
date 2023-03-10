@@ -11,13 +11,16 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.itwill.guest.Guest;
 import com.itwill.guest.GuestService;
 
-@Controller
+@RestController
 public class GuestController {
+	
 	@Autowired
 	private GuestService guestService;
 	
@@ -40,9 +43,11 @@ public class GuestController {
 	public String guest_list(Model model) throws Exception{
 		String forwardPath = "";
 		List<Guest> guestList=guestService.selectAll();
-		model.addAttribute("guestList", guestList);
+		ObjectMapper objectMapper = new ObjectMapper();
+		String jsonTest = objectMapper.writeValueAsString(guestList);
+		model.addAttribute("jsonTest",jsonTest);
 		forwardPath="guest_list";
-		return forwardPath;
+		return jsonTest;
 	}
 	/*
 	 * parameter에 guest_no 가 존재하지않으면
