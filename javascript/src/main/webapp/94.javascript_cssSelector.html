@@ -56,9 +56,15 @@ body  span{
 	
 	<script type="text/javascript">
 		/********직계자식 > ***********/
-		
+		let nodeList1 = document.querySelectorAll('body > span');
+		for(node of nodeList1){
+			node.style.border='3px dashed tomato';
+		}
 		/********자손모두  ************/
-		
+		let nodeList2 = document.querySelectorAll('body span');
+		for(node of nodeList2){
+			node.style.backgroundColor='pink';
+		}
 		
 	</script>
 </body>
