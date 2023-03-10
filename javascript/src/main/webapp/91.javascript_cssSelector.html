@@ -22,7 +22,13 @@
 			window.onload=function(e){
 				/*****dom tree생성후 랜더링전 dom node찾기******/
 				//document.getElementsByTagName("div");
+				let divElementList = document.querySelectorAll("p");
+				for(div of divElementList){
+					div.style.background="pink";
+				}
 				
+				let divElement = document.querySelector("div");
+				divElement.style.background="gold";
 			};
 			
 			

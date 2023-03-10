@@ -29,14 +29,19 @@
 		/*
 		 1.id selector(#)
 		*/
-		
+		document.querySelector('#title').innerHTML='안녕 querySelector';
 		/*
 		2.class selector(.)
 		*/
+		document.querySelector('.contents').innerHTML+='변경';
 		
 		/*
 		3. tag selector
 		*/
+		for(h2Element of document.querySelectorAll('h2')){
+			h2Element.style.background='mistyrose';
+		}
+		
 		
 		
 	</script>
