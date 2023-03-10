@@ -142,7 +142,7 @@
 										<a href="#" class="guest_item_a" guest_no="{{guest_no}}">{{guest_title}}
 									</a>
 									</td>
-									<td width="120" align="center" bgcolor="ffffff">{{guest_content}}</td>
+									<td width="120" align="center" bgcolor="ffffff">{{guest_name}}</td>
 									<td width="120" align="center" bgcolor="ffffff">{{guest_date}}</td>
 								</tr>
 								<!-- guest end -->
@@ -178,7 +178,7 @@
 						</tbody>
 					</table> <!-- view Form  -->
 					{{#data}}
-					<form name="f" method="post">
+					<form id="guest_view_form" name="f" method="post">
 						<input type="hidden" name="guest_no" value="{{guest_no}}">
 						<table border="0" cellpadding="0" cellspacing="1" width="590"
 							bgcolor="BBBBBB">
@@ -319,7 +319,7 @@
 					</tbody>
 				</table> <!-- modify Form  -->
 				{{#data}}
-				<form name="f" method="post">
+				<form id="guest_modify_form" name="f" method="post">
 					<input type="hidden" name="guest_no" value="{{guest_no}}">
 					<table border="0" cellpadding="0" cellspacing="1" width="590"
 						bgcolor="BBBBBB">

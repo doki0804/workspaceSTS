@@ -4,11 +4,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -81,17 +83,13 @@ public class UserController {
 		return forwardPath;
 	}
 	@LoginCheck
-	@RequestMapping("/user_view")
-	public String user_view(HttpServletRequest request) throws Exception {
-		String forwardPath = "";
-		/************** login check **************/
-		/****************************************/
-		String sUserId =(String)request.getSession().getAttribute("sUserId");
-		User loginUser=userService.findUser(sUserId);
-		request.setAttribute("loginUser", loginUser);
-		forwardPath="user_view";
-		
-		return forwardPath;
+	@GetMapping("/users/{userId}")
+	public ResponseEntity<User> user_view(@PathVariable("userId") String userId) throws Exception {
+	    User user = userService.findUser(userId);
+	    if(user == null) {
+	        throw new UserNotFoundException("User with id " + userId + " not found");
+	    }
+	    return ResponseEntity.ok(user);
 	}
 	@LoginCheck
 	@PostMapping("user_modify_form")
