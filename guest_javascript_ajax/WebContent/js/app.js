@@ -92,6 +92,10 @@ document.addEventListener('click',function(e){
 		e.preventDefault(); 
 	}
 	
+	if(e.target.id=='btn_guest_write_form'){
+		menuGuestWriteForm.click();
+	}
+	
 	if(e.target.id=='btn_guest_list'){
 		menuGuestList.click();
 	}
