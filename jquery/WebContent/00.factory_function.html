@@ -19,11 +19,11 @@
 	console.log(window.$);
 	
 	$(function(){
-	    console.log('------DOM tree로딩직후 호출되는코드------');	
+	    console.log('------DOM tree로딩직후 호출되는코드[jQuery,$]------');	
 	});
 	
 	window.onload=function(){
-		console.log('------DOM tree로딩직후 호출되는코드------');
+		console.log('------DOM tree로딩직후 호출되는코드[window.onload]------');
 		let jQueryWrapperObject1 = jQuery('h1');
 		let jQueryWrapperObject2 = $('h2');
 		console.log("3.factory function return:"+jQueryWrapperObject1);
@@ -37,6 +37,22 @@
 		
 		$('h3').css('background','pink').text('jQuery chaining coding');
 		$('h4').text('힘내세요~~').css('border','5px dotted blue');
+		$('h5').css('color','green').text('오늘은 월요일입니다.!!!');
+		$('h6').css('color','red').css('background','yellow');
+		
+		console.log($('h5').text());
+		
+		let nameArray=['kim','dim','sim','fim','aim'];
+		$.each(nameArray,function(i,element){
+			console.log(i+'-->'+element);
+		});
+		
+		let h3Element=document.querySelector('h3');
+		let h3JQueryObject = $(h3Element);
+		console.log('h3Element 표준객체 : '+ h3Element);
+		console.log('h3jQueryObject jQeury객체 : '+ h3JQueryObject);
+		h3JQueryObject.text('jQuery객체');
+		
 	};
 </script>
 </head>
