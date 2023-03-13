@@ -18,11 +18,17 @@
 		$.grep();
 		*/
 		
+		let filterNameArray = $.grep(memberNameArray,(name,index)=>name.startsWith('k'));
 		
 		
+		$.each(filterNameArray,function(i,name){
+			$('.selected1').append(name+" ");
+		});
 		
-		
-		
+		let filterMemberArray = $.grep(memberArray,(member,index)=>member.address=='경기미');
+		$.each(filterMemberArray,(i,member)=>{
+			$('.selected2').append(`[${member.id}]${member.name},${member.address}`);
+		});
 		
 	});
 </script>
