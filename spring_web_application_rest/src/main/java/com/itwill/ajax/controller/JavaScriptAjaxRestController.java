@@ -73,10 +73,14 @@ public class JavaScriptAjaxRestController {
 		return resultMap;
 	}
 
-	
+	@GetMapping("/suggest")
 	public Map<String,Object> suggest(@RequestParam(value = "keyword",defaultValue = "") String keyword ) {
-		
-		return null;
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		resultMap.put("code", 1);
+		resultMap.put("msg", "성공");
+		resultMap.put("data", this.search(keyword));
+		System.out.println(this.search(keyword));
+		return resultMap;
 	}
 
 	public List<News> getNewsList() {
