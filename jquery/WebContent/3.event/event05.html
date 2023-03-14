@@ -16,8 +16,15 @@ $(function() {
 	/*
 	이벤트 1회발생후 이벤트 제거
 	*/
-
-
+	/*
+	$('li').click(function(e){
+		alert($(e.target).text());
+		$('li').off();
+	});
+	*/
+	$('li').one('click',function(e){
+		alert($(this).text());
+	});
 });
 </script>
 </head>
