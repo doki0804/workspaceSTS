@@ -15,9 +15,10 @@ import * as Request from "./request.js";
 	.guest_item_a
 	
 */ 
+/************validator 국제화*************/
+$.getScript(`js/localization/messages_${navigator.language}.js`);
 /************validator 기본설정*************/
 console.log(navigator.language);
-$.getScript(`js/localization/messages_${navigator.language}.js`);
 let validator = null;
 
 $.validator.setDefaults({
@@ -160,7 +161,7 @@ $(document).on('click','#btn_guest_modify_action',function(e){
 
 /*******guest_remove_action*******/
 $(document).on('click','#btn_guest_remove_action',function(e){
-	let guest_no = e.target.getAttribute('guest_no');
+	let guest_no = $('#guest_view_form input[name=guest_no]').val();
 	Request.ajaxRequest(`guest/${guest_no}`,'DELETE',{},'application/json;charset=UTF-8',function(jsonResult){
 		if(jsonResult.code==1){
 			Request.ajaxRequest('guest','GET',{},'application/json;charset=UTF-8',function(jsonResult){
