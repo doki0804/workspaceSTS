@@ -27,7 +27,7 @@ namespace="com.itwill.guest.mapper.GuestMapper">
 	</delete>
 	<update id="updateGuest" parameterType="com.itwill.guest.Guest">
 		update guest set  guest_name=#{guest_name}, guest_email=#{guest_email},
-		                  guest_homepage=#{guest_homepage}, guest_title=#{guest_title}, 
+		                  guest_homepage=#{guest_homepage}, guest_title=#{guest_title},
 		                  guest_content=#{guest_content} 
 		where guest_no = #{guest_no}
 	</update>
