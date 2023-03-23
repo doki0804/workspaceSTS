@@ -162,13 +162,14 @@ $(document).on('click','#btn_guest_modify_action',function(e){
 /*******guest_remove_action*******/
 $(document).on('click','#btn_guest_remove_action',function(e){
 	let guest_no = $('#guest_view_form input[name=guest_no]').val();
-	Request.ajaxRequest(`guest/${guest_no}`,'DELETE',{},'application/json;charset=UTF-8',function(jsonResult){
-		if(jsonResult.code==1){
-			Request.ajaxRequest('guest','GET',{},'application/json;charset=UTF-8',function(jsonResult){
-			View.render("#guest-list-template",jsonResult);
-			},true);
-		}else {
-			alert(jsonResult.msg);
+	Request.ajaxRequest(`guest/${guest_no}`,'DELETE',{},'application/json;charset=UTF-8',function(resultJson){
+		if(resultJson.code==1){
+		/*
+		#menu_guest_list jQuery객체이벤트 발생
+		*/
+			$('#menu_guest_list').trigger('click');
+		}else{
+			alert(resultJson.msg);
 		}
 	},true);
 	e.preventDefault();
@@ -182,6 +183,16 @@ $(document).on('click','.guest_item_a',function(e){
 	},true);
 	e.preventDefault();
 });
+
+/************** jQuery Ajax Global Event **************/
+$(document).ajaxStart(function(){
+	$("<div id='loading'>loading...</div>").insertBefore('#content').show();
+});
+$(document).ajaxComplete(function(){
+	$("#loading").hide();
+	$('#loading').remove();
+});
+
 
 $(function(){
 	View.render('#guest-main-template',{})
