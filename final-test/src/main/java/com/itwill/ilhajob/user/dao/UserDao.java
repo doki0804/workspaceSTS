@@ -1,4 +1,4 @@
-package com.itwill.ilhajob.user;
+package com.itwill.ilhajob.user.dao;
 
 import java.util.ArrayList;
 import java.util.List;
