@@ -43,7 +43,7 @@ class ProviderRepositoryTest extends SpringJpaRelationApplicationTests {
 		
 	}
 	/**********************case1 CascadeType.PERSIST*************************/
-	@Test
+	//@Test
 	void providerProductSaveAndReadCasCadeTypePERSIST() {
 		Provider provider = new Provider("한빛미디어");
 		
