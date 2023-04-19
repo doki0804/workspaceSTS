@@ -1,8 +1,9 @@
 package com.springboot.security.oauth.auth.userinfo;
 
+import java.io.Serializable;
 import java.util.Map;
 
-public class NaverUserInfo implements Oauth2UserInfo{
+public class NaverUserInfo implements Oauth2UserInfo, Serializable{
     private Map<String, Object> attributes;
     private Map<String, Object> attributesResponse;
 

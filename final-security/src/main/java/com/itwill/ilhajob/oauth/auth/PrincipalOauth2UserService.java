@@ -23,7 +23,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
     private final UserRepository userRepository;
-    @Autowired
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override

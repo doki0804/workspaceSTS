@@ -6,11 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.itwill.ilhajob.user.entity.User;
 
 
-@SpringBootApplication(scanBasePackageClasses = 
-	{User.class, Corp.class,CorpImage.class,
-	 App.class, Recruit.class, Cv.class,
-	 Edu.class, Exp.class, Awards.class,
-	 Review.class, Blog.class})
+@SpringBootApplication
 public class FinalProjectTeam1IlhajobApplication {
 
 	public static void main(String[] args) {

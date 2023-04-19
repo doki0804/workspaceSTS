@@ -14,7 +14,7 @@ spring:
           # 네이버는 Spring Security를 공식 지원하지 않기 때문에 CommonOAuth2Provider 에서 해주는 값들을 수동으로 입력한다.
           naver:
             client-id: ab2_PuzhTxZwg704hL1r
-            client-secret: ab2_PuzhTxZwg704hL1r
+            client-secret: d3PDFwQNNW
             scope:
               - name
               - email
