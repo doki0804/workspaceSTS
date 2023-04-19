@@ -20,12 +20,13 @@ spring:
     properties:
       hibernate: 
         format_sql: true
+        use_sql_comments: false
     hibernate:
       ddl-auto: validate
     #defer-datasource-initialization: true   
   sql:
     init:
-      mode: always
+      mode: never
       schema-locations:
       - classpath:user.ddl
       - classpath:board.ddl
