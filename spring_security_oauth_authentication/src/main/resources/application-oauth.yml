@@ -12,7 +12,7 @@ spring:
               - email
               - profile
           kakao:
-            client-id: 4a685eb06fad654609f4861e1bff9ea2
+            client-id: d3742a6e7bc1174fcc3ae9827943de3d
             redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
             client-authentication-method: POST
             authorization-grant-type: authorization_code
@@ -20,8 +20,8 @@ spring:
             client-name: Kakao
           # 네이버는 Spring Security를 공식 지원하지 않기 때문에 CommonOAuth2Provider 에서 해주는 값들을 수동으로 입력한다.
           naver:
-            client-id: uKiP7WPNBZBkt2l_R87L
-            client-secret: <*****************>
+            client-id: ab2_PuzhTxZwg704hL1r
+            client-secret: d3PDFwQNNW
             scope:
               - name
               - email

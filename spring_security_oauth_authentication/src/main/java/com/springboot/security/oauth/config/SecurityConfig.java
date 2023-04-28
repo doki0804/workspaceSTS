@@ -86,6 +86,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         //post요청 forbiddon에러 방지
+    	System.out.println("http>>>>>"+http);
         http.csrf().disable();
         http.authorizeRequests()
                 .antMatchers(whitelist).permitAll()

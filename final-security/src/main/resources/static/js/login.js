@@ -1,9 +1,10 @@
+/*const w = 600;
+const h = 600;
+const left = (window.innerWidth - w) / 2;
+const top = (window.innerHeight - h) / 2;
+
 (function($) {
 	
-	const w = 600;
-	const h = 600;
-	const left = (window.innerWidth - w) / 2;
-	const top = (window.innerHeight - h) / 2;
 	
 	$(document).on('click', '.naver-login-btn', (e) => {
 		e.preventDefault();
@@ -27,4 +28,4 @@
 
 
 	
-})(window.jQuery);
+})(window.jQuery);*/

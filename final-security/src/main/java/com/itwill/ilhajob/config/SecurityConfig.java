@@ -83,12 +83,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
               "/oauth2", "/api/**",
               "/",
               "/login","/login-popup", "/register", "/register-popup", "/findPassword", "/findPasswordEmailSend",
-              "/item/list", "/item/list/**", "/item/{itemId}"
+              "/item/list", "/item/list/**", "/item/{itemId}", "/cadidate-dashboard/**"
     };
     
     @Override
     public void configure(WebSecurity web) throws Exception {
-    	web.ignoring().antMatchers( "/css/**", "/sass/**","/fonts/**", "/js/**", "/images/**","/","/index","/login","/login**", "/final-jpa/**");
+    	web.ignoring().antMatchers( "/css/**", "/sass/**","/fonts/**", "/js/**", "/images/**","/","/index","/login","/login**", "/final-jpa/**","/cadidate-dashboard/**");
     }
     
     @Override
@@ -114,10 +114,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     	            .logoutSuccessUrl("/")
     	        .and()
     	        .oauth2Login()
-    	            .loginPage("/login")
+    	            .loginPage("/login-popup")
     	            .defaultSuccessUrl("/")
     	            .userInfoEndpoint()
     	            .userService(principalOauth2UserService);
+
     }
 
 }

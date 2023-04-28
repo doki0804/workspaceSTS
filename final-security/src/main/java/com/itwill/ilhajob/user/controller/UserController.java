@@ -1,5 +1,6 @@
 package com.itwill.ilhajob.user.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -8,6 +9,7 @@ import javax.sound.sampled.ReverbType;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -80,26 +82,30 @@ public class UserController {
 	 * ++ 메시지 알림
 	 */
 	
-//	//메인 페이지
+	//메인 페이지
 //	@RequestMapping("/index")
-//	public String main() {
-//		return "index";
+//	public String main(Authentication authentication,Principal principal) {
+//		System.out.println(authentication);
+//		System.out.println(principal);
+//		return "/";
 //	}
 	
 	//회원 대시보드 보기
-	@LoginCheck
+	//@LoginCheck
 	@RequestMapping("/candidate-dashboard")
-	public String dashboard(HttpServletRequest request) throws Exception {
-		String sUserId = (String)request.getSession().getAttribute("sUserId");
+	public String dashboard(HttpServletRequest request,Authentication authentication,Principal principal) throws Exception {
+		System.out.println("test >>>>>>"+authentication);
+		System.out.println("test >>>>>>"+principal);
+		//String sUserId = (String)request.getSession().getAttribute("sUserId");
 		//System.out.println(">>>>>>>>"+sUserId);
-		UserDto loginUser = userService.findUser(sUserId);
-		request.setAttribute("loginUser", loginUser);
+		//UserDto loginUser = userService.findUser(sUserId);
+		//request.setAttribute("loginUser", loginUser);
 		String forwardPath = "candidate-dashboard";
 		return forwardPath;
 	}
 	
 	//회원 정보 보기
-	@LoginCheck
+	//@LoginCheck
 	@RequestMapping("/candidate-dashboard-profile")
 	public String user_profile(HttpServletRequest request) throws Exception {
 		String forwardPath = "";
